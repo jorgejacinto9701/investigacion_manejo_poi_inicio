@@ -123,7 +123,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 	private static String TITLE = "Listado de valoración de mensaje NPS Académico";
 	private static int[] HEADER_WITH = {  };
 
-	public ByteArrayInputStream lista(List<Alumno> lstAlumno) {
+	public ByteArrayInputStream listaAlumnoExcel(List<Alumno> lstAlumno) {
 		try (Workbook excel = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
 
 			Sheet hoja = excel.createSheet(SHEET);

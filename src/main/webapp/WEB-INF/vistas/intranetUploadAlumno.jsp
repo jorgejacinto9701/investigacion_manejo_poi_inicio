@@ -69,7 +69,7 @@ $("#id_btn_subir").click(function(){
     
     $.ajax({
           type: "POST",
-          url: "subirPlantillaTema", 
+          url: "subirPlantillaAlumno", 
           data: formData,
           enctype : 'multipart/form-data',
           contentType : false,

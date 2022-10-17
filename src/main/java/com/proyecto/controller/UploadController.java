@@ -28,8 +28,8 @@ public class UploadController {
 	@ResponseBody
 	public Map<String, Object> subirPlantillaAlumno(@RequestParam("file") MultipartFile file) {
 		log.info(">>> subirPlantillaAlumno ");
-
-		return null;
+		Map<String, Object> salida =alumnoService.insertaAlumnoExcel(file);
+		return salida;
 	}
 	
 	

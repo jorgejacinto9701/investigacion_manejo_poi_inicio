@@ -12,5 +12,5 @@ public interface AlumnoService {
 
 	public abstract Map<String, Object> insertaAlumnoExcel(MultipartFile file);
 	public abstract List<Alumno> listaAlumno();
-	public abstract ByteArrayInputStream lista(List<Alumno> lstAlumno);
+	public abstract ByteArrayInputStream listaAlumnoExcel(List<Alumno> lstAlumno);
 }

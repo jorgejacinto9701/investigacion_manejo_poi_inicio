@@ -32,7 +32,7 @@
 <div class="container" style="margin-top: 4%"><h4>Descarga de Alumno</h4></div>
 <div class="container" style="margin-top: 1%">
 		 <div class="col-md-12" >
-		       <form  action="listaMensajeValoracionTotales" class="fileDownloadForm"  method="post">
+		       <form  action="listaAlumnosDescarga" class="fileDownloadForm"  method="post">
 				<div class="row">
 						<div class="form-group">
 							<button  type="submit" style="width: 220px" class='btn btn-primary btn-sm'>
