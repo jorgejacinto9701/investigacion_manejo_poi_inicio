@@ -40,7 +40,7 @@ public class DownloadController {
 		String filename  = null;
 		try {
 			List<Alumno> lista = alumnoService.listaAlumno();
-			filename = "Planilla_Reporte_NPS__"+ FunctionUtil.getDateNowInString()+".xlsx";
+			filename = "Planilla_Listado_Alumno__"+ FunctionUtil.getDateNowInString()+".xlsx";
 			bytes = alumnoService.listaAlumnoExcel(lista);
 			body = new InputStreamResource(bytes);
 		} catch (Exception e) {
