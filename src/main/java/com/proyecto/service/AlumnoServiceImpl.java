@@ -32,12 +32,12 @@ import com.proyecto.util.UtilExcel;
 @Service
 public class AlumnoServiceImpl implements AlumnoService {
 
-	private static String[] COLUMNAS_Tema = {  };
-	private static CellType[][] TIPOS_DATOS_Tema = { {CellType.STRING}, {CellType.STRING, CellType.NUMERIC} , {CellType.STRING} };
 
 	@Autowired
 	private AlumnoRepository alumnoRepository;
 
+	private static String[] COLUMNAS_Tema = {  "NOMBRE",	"DNI",	"CORREO",  "FECHA NACIMIENTO" };
+	private static CellType[][] TIPOS_DATOS_Tema = { {CellType.STRING}, {CellType.STRING, CellType.NUMERIC} , {CellType.STRING}, {CellType.STRING} };
 
 	@Transactional
 	@Override
@@ -62,7 +62,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 			}
 
 			List<Alumno> lstAlumnos = new ArrayList<Alumno>(); 
-			String celdaNombre = null, celdaAspecto = null, celdaDefinicion = null;
+			String celdaNombre = null, celdaDNI = null, celdaCorreo = null, celdaFecha = null;
 			for (Row row : sheet) {
 				if (noEsPrimero) {
 					for (Cell cell : row) {
@@ -73,27 +73,41 @@ public class AlumnoServiceImpl implements AlumnoService {
 							break;
 						case 2:
 							if (cell.getCellType() == CellType.NUMERIC) {
-								celdaAspecto = String.valueOf((int) cell.getNumericCellValue()).trim();
+								celdaDNI = String.valueOf((int) cell.getNumericCellValue()).trim();
 							} else {
-								celdaAspecto = cell.getStringCellValue().trim();
-								celdaAspecto = FunctionUtil.eliminaEspacios(celdaAspecto);
+								celdaDNI = cell.getStringCellValue().trim();
+								celdaDNI = FunctionUtil.eliminaEspacios(celdaDNI);
 							}
 							break;
 						case 3:
-							celdaDefinicion = cell.getStringCellValue().trim();
-							celdaDefinicion = FunctionUtil.eliminaEspacios(celdaDefinicion);
+							celdaCorreo = cell.getStringCellValue().trim();
+							celdaCorreo = FunctionUtil.eliminaEspacios(celdaCorreo);
 							break;
+						case 4:
+							celdaFecha = cell.getStringCellValue().trim();
+							celdaFecha = FunctionUtil.eliminaEspacios(celdaFecha);
+							System.out.println(celdaFecha);
+							break;							
 						}
 					}
-				
-					//lstAlumnos.add();
+					Alumno objAlumno = new Alumno();
+					objAlumno.setNombre(celdaNombre);
+					objAlumno.setDni(celdaDNI);
+					objAlumno.setCorreo(celdaCorreo);
+					objAlumno.setFechaNacimiento(FunctionUtil.getFechaDate(celdaFecha));
+					lstAlumnos.add(objAlumno);
 				}
 				noEsPrimero = true;
 			}
 			
-
-			
-			//mensajes.put("mensaje", "Se ha ingresado " + aspectosIngresados + " aspectos(s) y se ha ingresado " + temasIngresados + " tema(s).");
+			int ingresados = 0;
+			for (Alumno  objAlumno: lstAlumnos) {
+				Alumno objSalida = alumnoRepository.save(objAlumno);
+				if(objSalida != null) {
+					ingresados++;	
+				}
+			}
+			mensajes.put("mensaje", "Se ha ingresado " + ingresados + " alumno(s).");
 			return mensajes;
 		} catch (Exception e) {
 			e.printStackTrace();
