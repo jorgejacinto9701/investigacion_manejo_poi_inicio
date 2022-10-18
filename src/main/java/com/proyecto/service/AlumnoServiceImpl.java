@@ -176,12 +176,12 @@ public class AlumnoServiceImpl implements AlumnoService {
 					cel2.setCellStyle(estiloNormalCentrado);
 					
 					Cell cel3 = row.createCell(3);
-					cel3.setCellValue(obj.getFechaNacimiento());
-					cel3.setCellStyle(estiloNormalCentrado);
+					cel3.setCellValue(obj.getCorreo());
+					cel3.setCellStyle(estiloNormalIzquierda);
 					
 					Cell cel4 = row.createCell(4);
-					cel4.setCellValue(obj.getCorreo());
-					cel4.setCellStyle(estiloNormalIzquierda);
+					cel4.setCellValue(FunctionUtil.getFechaString(obj.getFechaNacimiento()));
+					cel4.setCellStyle(estiloNormalCentrado);
 			}
 			excel.write(out);
 			return new ByteArrayInputStream(out.toByteArray());
